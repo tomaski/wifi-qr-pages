@@ -4,14 +4,15 @@ CLI tool that turns WiFi credentials into printable A4 PDF pages with a QR code
 your guests can scan to join the network. Pages are rendered from Jinja2 HTML
 templates in `templates/`, so the layout is edited as HTML/CSS, not code.
 
-```
-WiFi QRcode
-scan to connect
-   [ QR code ]
-WiFi name     | My Network
-WiFi Password | s3cret-pass
-       Living room
-```
+<p align="center">
+  <img src="templates/preview-a4.jpg" width="500"
+       alt="A4 page: heading 'WiFi QRcode', sub-heading 'scan to connect', a QR
+            code, then the WiFi name and password in black-and-grey pill fields,
+            with a comment underneath.">
+</p>
+
+<p align="center"><em>The bundled <code>a4.html.j2</code> template, rendered by
+<code>./qrpages single --ssid "My Network" --password "s3cret-pass" --comment "Living room"</code></em></p>
 
 ## Install
 
@@ -103,7 +104,9 @@ CSS, where every value is a fixed millimetre measurement.
 ## Templates
 
 `templates/a4.html.j2` is a self-contained A4 page: `@page { size: 210mm 297mm }`,
-all lengths in `mm`, fonts embedded from `templates/fonts/`. Available variables:
+all lengths in `mm`, fonts embedded from `templates/fonts/`. It looks like
+[`templates/preview-a4.jpg`](templates/preview-a4.jpg) (shown at the top of this
+page). Available variables:
 
 | Variable | Description |
 |---|---|
