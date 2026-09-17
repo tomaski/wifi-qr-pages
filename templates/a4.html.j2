@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>{{ ssid }}</title>
+<style>
+/* ------------------------------------------------------------------
+   A4 WiFi QR-code page.
+   Every measurement below is a fixed value in millimetres, so the
+   printed result is identical regardless of viewport or zoom.
+   Colors marked "config" come from config.toml.
+   ------------------------------------------------------------------ */
+
+@font-face {
+    font-family: "Page Sans";
+    src: url("{{ fonts_url }}/Inter-variable.ttf") format("truetype-variations");
+    font-weight: 100 900;
+    font-style: normal;
+}
+@font-face {
+    /* JetBrains Mono: slashed zero, serifed uppercase I, curved lowercase l */
+    font-family: "Page Mono";
+    src: url("{{ fonts_url }}/JetBrainsMono-variable.ttf") format("truetype-variations");
+    font-weight: 100 800;
+    font-style: normal;
+}
+
+@page {
+    size: 210mm 297mm;
+    margin: 0;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    width: 210mm;
+    height: 297mm;
+}
+
+body {
+    font-family: "Page Sans", sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 18mm 20mm;
+    text-align: center;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+}
+
+h1 {
+    font-size: 16mm;
+    line-height: 19mm;
+    font-weight: 700;
+    letter-spacing: -0.2mm;
+    color: {{ typography.header_color }};          /* config */
+}
+
+h2 {
+    font-size: 7mm;
+    line-height: 9mm;
+    font-weight: 400;
+    letter-spacing: 0.4mm;
+    text-transform: lowercase;
+    color: {{ typography.subheader_color }};       /* config */
+    margin-top: 2mm;
+}
+
+.qr {
+    margin-top: 10mm;
+}
+
+.qr > svg {
+    display: block;
+    width: 95mm;
+    height: 95mm;
+}
+
+/* --- SSID / password block: label pill + value pill on one line --- */
+.credentials {
+    display: grid;
+    grid-template-columns: 52mm minmax(70mm, 110mm);
+    row-gap: 3mm;
+    justify-content: center;
+    margin-top: 12mm;
+}
+
+.credentials .label,
+.credentials .value {
+    font-size: 6mm;
+    line-height: 8mm;
+    padding: 2mm 4mm;
+    min-width: 0;
+}
+
+.credentials .label {
+    font-family: "Page Sans", sans-serif;
+    font-weight: 500;
+    letter-spacing: 0.1mm;
+    color: #ffffff;
+    background: #000000;
+    border-radius: 2.5mm 0 0 2.5mm;
+    text-align: right;
+    /* keep the label text centred when a long value wraps to several lines */
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.credentials .value {
+    font-family: "Page Mono", monospace;
+    font-weight: 500;
+    letter-spacing: 0.1mm;
+    color: #000000;
+    background: #e6e6e6;
+    border-radius: 0 2.5mm 2.5mm 0;
+    text-align: left;
+    white-space: pre-wrap;        /* keep spaces, still wrap long values */
+    overflow-wrap: anywhere;
+}
+
+.comment {
+    font-size: 5.5mm;
+    line-height: 7mm;
+    font-weight: 400;
+    letter-spacing: 0.1mm;
+    color: {{ typography.comment_color }};         /* config */
+    margin-top: 12mm;
+    max-width: 160mm;
+}
+</style>
+</head>
+<body>
+    <h1>WiFi QRcode</h1>
+    <h2>scan to connect</h2>
+
+    <div class="qr">{{ qr_svg | safe }}</div>
+
+    {% if display.credentials %}
+    <div class="credentials">
+        <div class="label">WiFi name</div>
+        <div class="value">{{ ssid }}</div>
+        <div class="label">WiFi Password</div>
+        <div class="value">{{ password }}</div>
+    </div>
+    {% endif %}
+
+    {% if display.comment and comment %}
+    <p class="comment">{{ comment }}</p>
+    {% endif %}
+</body>
+</html>

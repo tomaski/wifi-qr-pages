@@ -1,0 +1,5 @@
+ssid,password,comment,security,hidden
+Home Net,Il10O-pass-1,Living room,WPA,false
+Guest WiFi,welcome2024,,WPA,false
+Cafe Public,,Free access - no password,nopass,false
+Workshop 2.4GHz,Str0ng!Pass#word-2026,Hidden network in the basement,WPA,true

@@ -1,0 +1,21 @@
+# wifi-qr-pages configuration.
+# Sizes and typography live in the template's CSS (templates/*.html.j2);
+# this file holds the settings that change from run to run.
+
+# Template used to render each page (file name inside templates/).
+template = "a4.html.j2"
+
+[typography]
+# Colors for the non-monospace typography (headers, labels, comment).
+header_color = "#000000"      # "WiFi QRcode"
+subheader_color = "#555555"   # "scan to connect"
+comment_color = "#333333"     # comment line
+
+[qr]
+error_correction = "M"        # L (7%) | M (15%) | Q (25%) | H (30%)
+color = "#000000"             # module (dark) color
+background = "#FFFFFF"        # quiet-zone / light color
+
+[display]
+credentials = true            # show the "WiFi name" / "WiFi Password" block
+comment = true                # show the comment line

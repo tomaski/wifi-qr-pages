@@ -1,0 +1,36 @@
+# --- Toolchain installed by ./setup.sh (reproducible, never committed) ---
+.venv/
+.tools/
+templates/fonts/*.ttf
+templates/fonts/*-OFL.txt
+
+# --- Live data: input lists and generated sheets hold real WiFi passwords ---
+input/*
+!input/.gitkeep
+!input/example.txt
+output/*
+!output/.gitkeep
+
+# --- Python ---
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# --- Local overrides / secrets ---
+.env
+.env.*
+config.local.toml
+
+# --- Editors and OS cruft ---
+.DS_Store
+._*
+.Spotlight-V100
+.Trashes
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+*~
